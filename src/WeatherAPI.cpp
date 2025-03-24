@@ -2,8 +2,20 @@
 #include <curl/curl.h>
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include <algorithm>
 
 using json = nlohmann::json;
+
+// Helper function to encode spaces in city names
+std::string encodeCityName(const std::string& city) {
+    std::string encoded = city;
+    size_t pos = 0;
+    while ((pos = encoded.find(" ")) != std::string::npos) {
+        encoded.replace(pos, 1, "%20");
+        pos += 3;
+    }
+    return encoded;
+}
 
 // Callback function for libcurl
 size_t WeatherAPI::writeCallback(void* contents, size_t size, size_t nmemb, std::string* output) {
@@ -23,7 +35,8 @@ bool WeatherAPI::fetchWeather(const std::string& city, WeatherData& weather) {
 
     curl = curl_easy_init();
     if (curl) {
-        std::string url = "https://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=" + city + "&aqi=yes";
+        std::string encodedCity = encodeCityName(city);
+        std::string url = "https://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=" + encodedCity + "&aqi=yes";
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
