@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather App</title>
+  </head>
+
+  <body>
+    <div id="background-gradient" class="background-gradient"></div>
+
+    <div class="container">
+      <header>
+        <h1 id="welcome-header" class="welcome-header">
+          Hello again. What's the weather like today?
+        </h1>
+        <div id="search-bar" class="search-bar">
+          <input
+            type="text"
+            id="city-input"
+            class="city-input"
+            placeholder="Enter a city..."
+            aria-label="search"
+            autocomplete="off"
+          />
+          <button id="search-btn" class="search-btn">
+            <i class="search-icon fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- == ERROR MESSAGE BOX === -->
+      <div id="error-box" class="error-box hidden"></div>
+
+      <main>
+        <!-- LOADER -->
+        <div id="loader" class="loader hidden">
+          <div class="lds-ripple">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <!-- WEATHER OUTPUT -->
+        <div id="weather-output" class="hidden">
+          <!-- CURRENT WEATHER HEADING -->
+          <h2 id="current-weather-heading" class="current-weather-heading"></h2>
+
+          <!-- CURRENT WEATHER -->
+          <section id="current-weather" class="current-weather"></section>
+
+          <!-- FORECAST -->
+          <section id="forecast" class="forecast"></section>
+        </div>
+      </main>
+    </div>
+    <!-- <script src="main.js"></script> -->
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
